@@ -1,0 +1,27 @@
+{
+  "name": "detectivebrandon's",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lamar#6227",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^11.13.5",
+    "discord.js": "^11.4.2",
+    "exit": "^0.1.2",
+    "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "jshint": "^2.10.2",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "typescript-tslint-plugin": "^0.3.1"
+  }
+}
