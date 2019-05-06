@@ -2,9 +2,6 @@
 const fs = require('fs'); 
 const Discord = require('discord.js');
 const { prefix, token, ownerID } = require('./config.json');
-const fetch = require('node-fetch');
-const querystring = require('querystring');
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -29,7 +26,8 @@ client.on('ready', () => {
  // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
 
     // Set bot status to: "Playing with JavaScript"
-    client.user.setActivity("ping me for prefix");
+    client.user.setActivity(`on ${client.guilds.size} servers, ping me`);
+  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 
     // Alternatively, you can set the activity to any of the following:
     // PLAYING, STREAMING, LISTENING, WATCHING
@@ -132,40 +130,17 @@ client.on('message', (receivedMessage) => {
   }
 });
 
-client.on("message", async (message, args, trim) => {
+client.on("message", (message) => {
   if (message.author.bot) return;
   if (message.content.startsWith("dhelp")) {
     message.reply("no no not dhelp ``d help``");
   } else if (message.content.startsWith("D help")) {
-    message.reply("it's lower case ``d``");
+    message.reply("it's lower case ``d ``");
   } else if (message.content.startsWith("Dhelp")) {
     message.reply("no, lowercase d");
   } else if (message.content.startsWith(`${prefix}dick`)) {
     message.reply("you must be one of the first humanss to be dumb enough to shove a whale up a bot, why");
-  } else if (message.content.startsWith(`${prefix}urban`)) {
-    if (!args.length) {
-			return message.channel.send('You need to supply a search term buddy');
-		}
-
-		const query = querystring.stringify({ "term": args.join(' ') });
-
-		const { body } = await fetch.get(`https://api.urbandictionary.com/v0/define${query}`).then(response => response.json());
-
-		if (!body.list.length) {
-			return message.channel.send(`no prison records results found for **${args.join(' ')}**.`);
-		}
-
-		const [answer] = body.list;
-
-		const embed = new Discord.RichEmbed().
-			setColor('#EFFF00').
-			setTitle(answer.word).
-			setURL(answer.permalink).
-			addField('Definition', trim(answer.definition, 1024)).
-			addField('Example', trim(answer.example, 1024)).
-			addField('Rating', `${answer.thumbs_up} bottoms up😜. ${answer.thumbs_down} thumbs down.`);
-
-		message.channel.send(embed);
+  
 	}
 });
 
