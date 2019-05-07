@@ -20,7 +20,7 @@ client.on("warn", (e) => console.warn(e));
 // eslint-disable-next-line id-length
 client.on("debug", (e) => console.info(e));
 
-client.on('ready', () => {
+client.once('ready', () => {
   // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
  // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
 
