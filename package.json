@@ -12,7 +12,7 @@
   "author": "lamar#6227",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^11.13.5",
+    "@types/node": "^11.13.10",
     "discord.js": "^11.4.2",
     "exit": "^0.1.2",
     "node-fetch": "^2.3.0"

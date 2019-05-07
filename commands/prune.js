@@ -1,5 +1,4 @@
 /* eslint-disable sort-keys */
-/* eslint-disable no-console */
 /* eslint-disable radix */
 module.exports = {
 	"name": "prune",

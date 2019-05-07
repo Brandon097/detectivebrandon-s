@@ -11,7 +11,6 @@ module.exports = {
     message.delete();
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
-    // eslint-disable-next-line no-console
     console.log(sayMessage);
 	}
 };

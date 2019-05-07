@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const fs = require('fs'); 
 const Discord = require('discord.js');
 const { prefix, token, ownerID } = require('./config.json');
@@ -112,7 +111,12 @@ client.on('message', message => {
 		command.execute(message, args);
 	} catch (error) {
 		console.error(error);
-    message.reply(`there was a oofiee trying to execute that command!, please notfiy @lamar#6227 \n  well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
+    message.reply(`there was a oofiee trying to execute that command!, please notfiy @lamar#6227
+    well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
+    console.error(`failed to send message to${message.user.tag}
+    type of channel${message.channel.type}
+    in channel${message.channel}
+    in server ${message.guild}`);
   }
 });
 
@@ -139,8 +143,7 @@ client.on("message", (message) => {
   } else if (message.content.startsWith("Dhelp")) {
     message.reply("no, lowercase d");
   } else if (message.content.startsWith(`${prefix}dick`)) {
-    message.reply("you must be one of the first humanss to be dumb enough to shove a whale up a bot, why");
-  
+    message.reply("no no not me choose moto moto");
 	}
 });
 

@@ -1,5 +1,6 @@
 module.exports = {
     "env": {
+        "commonjs": true,
         "es6": true,
         "node": true
     },
@@ -9,8 +10,7 @@ module.exports = {
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "ecmaVersion": 2018
     },
     "rules": {
         "accessor-pairs": "error",
@@ -52,7 +52,10 @@ module.exports = {
         "consistent-this": "error",
         "curly": "off",
         "default-case": "error",
-        "dot-location": "error",
+        "dot-location": [
+            "error",
+            "object"
+        ],
         "dot-notation": [
             "error",
             {
@@ -67,7 +70,10 @@ module.exports = {
         "func-call-spacing": "error",
         "func-name-matching": "error",
         "func-names": "error",
-        "func-style": "error",
+        "func-style": [
+            "error",
+            "expression"
+        ],
         "function-paren-newline": "error",
         "generator-star-spacing": "error",
         "global-require": "off",
@@ -129,6 +135,7 @@ module.exports = {
         "no-catch-shadow": "error",
         "no-confusing-arrow": "error",
         "no-continue": "error",
+        "no-console": "off",
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
         "no-else-return": "error",
@@ -219,7 +226,7 @@ module.exports = {
         "no-useless-constructor": "error",
         "no-useless-rename": "error",
         "no-useless-return": "error",
-        "no-var": "off",
+        "no-var": "error",
         "no-void": "error",
         "no-warning-comments": "error",
         "no-whitespace-before-property": "error",
@@ -238,10 +245,7 @@ module.exports = {
             "error",
             "always"
         ],
-        "operator-linebreak": [
-            "error",
-            "before"
-        ],
+        "operator-linebreak": "error",
         "padded-blocks": "off",
         "padding-line-between-statements": "error",
         "prefer-arrow-callback": "error",
@@ -284,7 +288,10 @@ module.exports = {
             "error",
             "always"
         ],
-        "strict": "error",
+        "strict": [
+            "error",
+            "never"
+        ],
         "switch-colon-spacing": "error",
         "symbol-description": "error",
         "template-curly-spacing": [

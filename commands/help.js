@@ -22,9 +22,12 @@ module.exports = {
 					message.reply('Im in your DMs now :stuck_out_tongue_winking_eye: :stuck_out_tongue_winking_eye: :stuck_out_tongue_winking_eye: uhhhh so you can use my commands');
 				}).
 				catch(error => {
-					// eslint-disable-next-line no-console
 					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.reply(`could not send help DM to ${message.author}!\n best if you find shelter until help arrives. \n when you find a payphone, \nc raft a quarter, \nthen please ping/DM \`\`\`lamar#6227\`\`\` as i am too lazy/unable to notify my own master`);
+					message.reply(`could not send help DM to ${message.author}!
+					best if you find shelter until help arrives.
+					when you find a payphone,
+					craft a quarter then,
+					 please ping/DM \`\`\`lamar#6227\`\`\` as i am too lazy/unable to notify my own master`);
 				});
 		}
 
