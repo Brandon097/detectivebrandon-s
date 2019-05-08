@@ -113,10 +113,6 @@ client.on('message', message => {
 		console.error(error);
     message.reply(`there was a oofiee trying to execute that command!, please notfiy @lamar#6227
     well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
-    console.error(`failed to send message to${message.user.tag}
-    type of channel${message.channel.type}
-    in channel${message.channel}
-    in server ${message.guild}`);
   }
 });
 

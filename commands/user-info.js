@@ -1,6 +1,6 @@
+/* eslint-disable sort-keys */
 module.exports = {
 	"name": "user-info",
-	// eslint-disable-next-line sort-keys
 	"description": "Display info about yourself,\nplease mention yourself if you want to see what info is on your user account insteaf of just doing **user-info** otherwise it will cause and erorre that i haven't found a way to fix yet",
 	execute (message) {
 		if (!message.mentions.users.size) {
