@@ -1,12 +1,16 @@
 {
   "name": "detectivebrandon's",
   "version": "1.0.0",
-  "description": "",
+  "description": "my discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node .",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Brandon097/detectivebrandon-s.git"
   },
   "keywords": [],
   "author": "lamar#6227",
@@ -14,8 +18,7 @@
   "dependencies": {
     "@types/node": "^11.13.10",
     "discord.js": "^11.4.2",
-    "exit": "^0.1.2",
-    "node-fetch": "^2.3.0"
+    "exit": "^0.1.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
