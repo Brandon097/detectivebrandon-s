@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const { prefix, token, ownerID } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -19,6 +18,12 @@ client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 // eslint-disable-next-line id-length
 client.on("debug", (e) => console.info(e));
+
+// Initialize the invite cache
+const invites = {};
+
+// A pretty useful method to create a delay without blocking the whole script.
+const wait = require('util').promisify(setTimeout);
 
 client.once('ready', () => {
   // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
@@ -44,6 +49,15 @@ client.once('ready', () => {
         guild.channels.forEach((channel) => {
             console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
         });
+    }); // "ready" isn't really ready. We need to wait a spell.
+    wait(1000);
+  
+    // Load all invites for all guilds and save them to the cache.
+    // eslint-disable-next-line id-length
+    client.guilds.forEach(g => {
+      g.fetchInvites().then(guildInvites => {
+        invites[g.id] = guildInvites;
+      });
     });
   console.log('I am ready!');
 });
@@ -51,16 +65,34 @@ client.once('ready', () => {
 client.on("guildMemberAdd", (member) => { // Check out previous chapter for information about this event
   const { guild } = member; 
   const memberTag = member.user.tag; 
+  // To compare, we need to load the current invite list.
+  member.guild.fetchInvites().then(guildInvites => {
+    // This is the *existing* invites for the guild.
+    const ei = invites[member.guild.id];
+    // Update the cached invites for the guild.
+    invites[member.guild.id] = guildInvites;
+    // Look through the invites, find the one for which the uses went up.
+    // eslint-disable-next-line id-length
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    // This is just to simplify the message being sent below (inviter doesn't have a tag property)
+    const inviter = client.users.get(invite.inviter.id);
+  
   if (guild.systemChannel) {
     guild.systemChannel.send(new Discord.RichEmbed(). // Creating instance of Discord.RichEmbed
     setTitle("someone walked in the wild west door's"). // Calling method setTitle on constructor. 
-    setDescription(`${memberTag}has joined the guild, Welcome to good burger, home of the good burger`). // Setting embed description
+    setDescription(`${memberTag}has joined the night club
+    using the sauce of${invite.code}
+    which surrendered${invite.uses} times
+    brought to us by are farvoite nuckle head${inviter.tag}
+    Welcome to good burger, home of the good burger`). // Setting embed description
     setThumbnail(member.user.displayAvatarURL). // The image on the top right; method requires an url, not a path to file!
     addField("Troops now", member.guild.memberCount). // Adds a field; First parameter is the title and the second is the value.
     setTimestamp() // Sets a timestamp at the end of the embed
     // eslint-disable-next-line function-paren-newline
     );
   }
+});
+ 
 });
 
 client.on('message', message => {
