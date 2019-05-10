@@ -16,11 +16,11 @@
   "author": "lamar#6227",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^11.13.10",
     "discord.js": "^11.4.2",
     "exit": "^0.1.2"
   },
   "devDependencies": {
+    "@types/node": "^11.13.10",
     "eslint": "^5.16.0",
     "jshint": "^2.10.2",
     "tslint": "^5.16.0",
