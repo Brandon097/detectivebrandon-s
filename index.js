@@ -25,7 +25,7 @@ const invites = {};
 // A pretty useful method to create a delay without blocking the whole script.
 const wait = require('util').promisify(setTimeout);
 
-client.once('ready', () => {
+client.on('ready', () => {
   // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
  // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
 
@@ -61,6 +61,10 @@ client.once('ready', () => {
     });
   console.log('I am ready!');
 });
+
+client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
+
+client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
 client.on("guildMemberAdd", (member) => { // Check out previous chapter for information about this event
   const { guild } = member; 
