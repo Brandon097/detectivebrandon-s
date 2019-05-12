@@ -16,7 +16,7 @@
   "author": "lamar#6227",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.5.0",
     "exit": "^0.1.2"
   },
   "devDependencies": {
