@@ -11,6 +11,7 @@ Your avatar: **${message.author.avatar}**
 Your avatar link: **${message.author.avatarURL}**
 Your default avatar link: **${message.author.defaultAvatarURL}**
 Your default avatar link if you have one: **${message.author.displayAvatarURL}**
+is you bot **${message.author.bot}**
 The last message you sent XD: __${message.author.lastMessage}__
 Discriminator???: **${message.author.discriminator}**
 Account verified: **${message.author.verified}**`);
