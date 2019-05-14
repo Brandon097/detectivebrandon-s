@@ -1,6 +1,6 @@
 const fs = require('fs'); 
 const Discord = require('discord.js');
-const { prefix, token, ownerID } = require('./config.json');
+const { token, prefix, ownerID } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -19,6 +19,9 @@ client.on("warn", (e) => console.warn(e));
 // eslint-disable-next-line id-length
 client.on("debug", (e) => console.info(e));
 
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
+
+
 // Initialize the invite cache
 const invites = {};
 
@@ -28,17 +31,6 @@ const wait = require('util').promisify(setTimeout);
 client.on('ready', () => {
   // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
  // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
-
-    // Set bot status to: "Playing with JavaScript"
-    client.user.setActivity(`on ${client.guilds.size} servers, ping me`);
-  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
-
-    // Alternatively, you can set the activity to any of the following:
-    // PLAYING, STREAMING, LISTENING, WATCHING
-    // For example:
-    // client.user.setActivity("TV", {type: "WATCHING"})
-
-      console.log(`Logged in as ${client.user.tag}!`);
 
     // List servers the bot is connected to
     console.log("Servers:");
@@ -59,7 +51,17 @@ client.on('ready', () => {
         invites[g.id] = guildInvites;
       });
     });
-  console.log('I am ready!');
+      // Set bot status to: "Playing with JavaScript"
+      client.user.setActivity(`on ${client.guilds.size} servers, ping me`);
+      console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
+    
+        // Alternatively, you can set the activity to any of the following:
+        // PLAYING, STREAMING, LISTENING, WATCHING
+        // For example:
+        // client.user.setActivity("TV", {type: "WATCHING"})
+    
+          console.log(`Logged in as ${client.user.tag}!`);
+    console.log('I am ready!');
 });
 
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
@@ -99,7 +101,7 @@ client.on("guildMemberAdd", (member) => { // Check out previous chapter for info
  
 });
 
-client.on('message', message => {
+client.on('message', (message, receivedMessage) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -150,9 +152,6 @@ client.on('message', message => {
     message.reply(`there was a oofiee trying to execute that command!, please notfiy @lamar#6227
     well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
   }
-});
-
-client.on('message', (receivedMessage) => {
   // Prevent bot from responding to its own messages
 
   if (receivedMessage.author === client.user) {
@@ -166,28 +165,23 @@ client.on('message', (receivedMessage) => {
   }
 });
 
-client.on("message", (message) => {
-  if (message.author.bot) return;
-  if (message.content.startsWith("dhelp")) {
-    message.reply("no no not dhelp ``d help``");
-  } else if (message.content.startsWith("D help")) {
-    message.reply("it's lower case ``d ``");
-  } else if (message.content.startsWith("Dhelp")) {
-    message.reply("no, lowercase d");
-  } else if (message.content.startsWith(`${prefix}dick`)) {
-    message.reply("no no not me choose moto moto");
-	}
-});
-
 const clean = text => {
   if (typeof text === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
   return text;
 };
 
-client.on("message", message => {
+client.on("message", (message) => {
   const args = message.content.split(" ").slice(1);
- 
-  if (message.content.startsWith(`${prefix}eval`)) {
+  if (message.author.bot) return;
+  if (message.content.startsWith("dhelp")) {
+    message.channel.send("no no not dhelp ``d help``");
+  } else if (message.content.startsWith("D help")) {
+    message.channel.send("it's lower case ``d ``");
+  } else if (message.content.startsWith("Dhelp")) {
+    message.channel.send("no, lowercase d");
+  } else if (message.content.startsWith(`${prefix}dick`)) {
+    message.channel.send("no no not me choose moto moto");
+} else if (message.content.startsWith(`${prefix}eval`)) {
     if (message.author.id !== ownerID) return;
     try {
       const code = args.join(" ");
@@ -196,7 +190,7 @@ client.on("message", message => {
       if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
  
       message.channel.send(clean(evaled), { "code": "xl" });
-      console.log(eval(code));
+      console.log("eval" + eval(code));
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
       console.error(err);
