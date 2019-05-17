@@ -101,7 +101,7 @@ client.on("guildMemberAdd", (member) => { // Check out previous chapter for info
  
 });
 
-client.on('message', (message, receivedMessage) => {
+client.on('message', (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -152,6 +152,8 @@ client.on('message', (message, receivedMessage) => {
     message.reply(`there was a oofiee trying to execute that command!, please notfiy @lamar#6227
     well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
   }
+});
+client.on('message', (receivedMessage) => {
   // Prevent bot from responding to its own messages
 
   if (receivedMessage.author === client.user) {
@@ -170,7 +172,7 @@ const clean = text => {
   return text;
 };
 
-client.on("message", (message) => {
+client.on("message", message => {
   const args = message.content.split(" ").slice(1);
   if (message.author.bot) return;
   if (message.content.startsWith("dhelp")) {

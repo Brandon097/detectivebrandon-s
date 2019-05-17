@@ -4,7 +4,7 @@ module.exports = {
 	"description": "Display info about yourself,\nplease mention yourself if you want to see what info is on your user account insteaf of just doing **user-info** otherwise it will cause and erorre that i haven't found a way to fix yet",
 	execute (message) {
 		if (!message.mentions.users.size) {
-			return message.channel.send(`Your username: **${message.author.username}**
+			return message.channel.send(`Your reflection: **${message.author.username}**
 Your tag???: **${message.author.tag}**
 Your user ID: **${message.author.id}**
 Your avatar: **${message.author.avatar}**
@@ -14,7 +14,9 @@ Your default avatar link if you have one: **${message.author.displayAvatarURL}**
 is you bot **${message.author.bot}**
 The last message you sent XD: __${message.author.lastMessage}__
 Discriminator???: **${message.author.discriminator}**
-Account verified: **${message.author.verified}**`);
+\`\`\`other infomation\`\`\`
+current statues: \`\`${message.author.presence.status}\`\`
+likes to be a\`\`${message.author.presence.game}\`\`model`);
 		}
 
 		const userList = message.mentions.users.map(user => `their username: **${user.username}**
