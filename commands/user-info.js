@@ -29,7 +29,9 @@ their default avatar link if you have one: **${user.displayAvatarURL}**
 are they bot: **${user.bot}**
 The last message they've sent XD: __${user.lastMessage}__
 Discriminator???: **${user.discriminator}**
-is User Account verified: **${user.verified}**`);
+\`\`\`other infomation\`\`\`
+current statues: \`\`${user.presence.status}\`\`
+likes to be a\`\`${user.presence.game}\`\`model`);
 
 		message.channel.send(userList);
 	}
