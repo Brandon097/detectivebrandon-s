@@ -32,16 +32,7 @@ client.on('ready', () => {
   // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
  // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
 
-    // List servers the bot is connected to
-    console.log("Servers:");
-    client.guilds.forEach((guild) => {
-        console.log(" - " + guild.name);
-
-        // List all channels
-        guild.channels.forEach((channel) => {
-            console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
-        });
-    }); // "ready" isn't really ready. We need to wait a spell.
+ // "ready" isn't really ready. We need to wait a spell.
     wait(1000);
   
     // Load all invites for all guilds and save them to the cache.
