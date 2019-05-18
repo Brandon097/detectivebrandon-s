@@ -32,7 +32,7 @@ The last message they've sent XD: __${user.lastMessage}__
 Discriminator???: **${user.discriminator}**
 \`\`\`other infomation\`\`\`
 current statues: \`\`${user.presence.status}\`\`
-likes to be a\`\`${user.presence.game}\`\`model`);
+likes to be a\`\`${user.presence.game}\`\`model, (if \`\`null\`\`=user is not playing a game)`);
 
 		message.channel.send(userList);
 	}
