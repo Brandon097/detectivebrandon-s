@@ -1,7 +1,8 @@
 /* eslint-disable sort-keys */
 module.exports = {
 	"name": "user-info",
-	"description": "Display info about yourself,\nplease mention yourself if you want to see what info is on your user account insteaf of just doing **user-info** otherwise it will cause and erorre that i haven't found a way to fix yet",
+	"description": "Display info about yourself",
+	"cooldown": 60,
 	execute (message) {
 		if (!message.mentions.users.size) {
 			return message.channel.send(`Your reflection: **${message.author.username}**
