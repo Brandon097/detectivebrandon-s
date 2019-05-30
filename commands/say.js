@@ -10,7 +10,7 @@ module.exports = {
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete();
     // And we get the bot to say the thing: 
-    message.channel.send(sayMessage);
+    message.channel.send(message.author, "likes to", sayMessage);
     console.log(sayMessage);
 	}
 };
