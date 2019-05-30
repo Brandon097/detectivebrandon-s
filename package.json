@@ -16,14 +16,14 @@
   "author": "lamar#6227",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.5.0",
+    "discord.js": "^11.5.1",
     "exit": "^0.1.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "jshint": "^2.10.2",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5",
+    "typescript": "^3.5.1",
     "typescript-tslint-plugin": "^0.3.1"
   }
 }
