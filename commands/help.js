@@ -36,7 +36,7 @@ module.exports = {
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 		if (!command) {
-			return message.reply('that thing doesn\'t exist :thinking: :thinking: :thinking:');
+			return message.reply('that Bitch doesn\'t exist :thinking: :thinking: :thinking:');
 		}
 
 		data.push(`**Name:** ${command.name}`);
