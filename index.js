@@ -1,6 +1,8 @@
-const fs = require('fs'); 
+const fs = require('fs');
+// require the discord.js module
 const Discord = require('discord.js');
 const { token, prefix, ownerID } = require('./config.json');
+// create a new Discord client
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -10,6 +12,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+// `client.on('...')` events and such below this point
 const cooldowns = new Discord.Collection();
 
 // eslint-disable-next-line id-length
@@ -21,7 +24,6 @@ client.on("debug", (e) => console.info(e));
 
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
-
 // Initialize the invite cache
 const invites = {};
 
@@ -29,9 +31,6 @@ const invites = {};
 const wait = require('util').promisify(setTimeout);
 
 client.on('ready', () => {
-  // var generalChannel = client.channels.get("537992939083923457"); // Replace with known channel ID
- // generalChannel.send("my prefix is ``d ``, my master told me he is going to update me with something about a voice channel? ```if this keep happening it means the bot has been automaticly restarted **after a file save** in order for the new added code to work.```");
-
  // "ready" isn't really ready. We need to wait a spell.
     wait(1000);
   
@@ -43,8 +42,8 @@ client.on('ready', () => {
       });
     });
       // Set bot status to: "Playing with JavaScript"
-      client.user.setActivity(`on ${client.guilds.size} servers, ping me`);
-      console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
+      client.user.setActivity(`on ${client.guilds.size} servers, ping me baby ping me`).
+      then(console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`));
     
         // Alternatively, you can set the activity to any of the following:
         // PLAYING, STREAMING, LISTENING, WATCHING
@@ -103,7 +102,7 @@ client.on('message', (message) => {
 	if (!command) return;
 
 	if (command.guildOnly && message.channel.type !== 'text') {
-		return message.reply('I can\'t execute that command inside DMs!, pls notify @lamar#6227\n or allow people to dm you???');
+		return message.reply('selected command can\'t be excuted in DMs!.\n or change your direct message setting to allow this');
 	}
 
 	if (command.args && !args.length) {
@@ -122,7 +121,7 @@ client.on('message', (message) => {
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 4) * 1000;
+	const cooldownAmount = (command.cooldown || 15) * 1000;
 
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -144,7 +143,7 @@ client.on('message', (message) => {
     well here is the error which you woudn't understand anyway\`\`\`${error}\`\`\``);
   }
 });
-client.on('message', (receivedMessage) => {
+client.on('message', receivedMessage => {
   // Prevent bot from responding to its own messages
 
   if (receivedMessage.author === client.user) {
@@ -164,8 +163,8 @@ const clean = text => {
 };
 
 client.on("message", message => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.split(" ").slice(1);
-  if (message.author.bot) return;
   if (message.content.startsWith("dhelp")) {
     message.channel.send("no no not dhelp ``d help``");
   } else if (message.content.startsWith("D help")) {
@@ -174,7 +173,7 @@ client.on("message", message => {
     message.channel.send("no, lowercase d");
   } else if (message.content.startsWith(`${prefix}dick`)) {
     message.channel.send("no no not me choose moto moto");
-} else if (message.content.startsWith(`${prefix}eval`)) {
+  } else if (message.content.startsWith(`${prefix}eval`)) {
     if (message.author.id !== ownerID) return;
     try {
       const code = args.join(" ");
@@ -190,4 +189,6 @@ client.on("message", message => {
     }
   }
 });
-client.login(token);
+// login to Discord with your app's token
+client.login(token).
+catch(console.error);
