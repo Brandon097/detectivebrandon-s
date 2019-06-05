@@ -1,5 +1,5 @@
 /* eslint-disable sort-keys */
-var exit = require('exit');
+const exit = require('exit');
 module.exports = {
 	"name": 'restart',
 	"description": 'restarts the bot, use if bot starts spamming',
