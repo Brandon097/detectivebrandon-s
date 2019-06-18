@@ -8,8 +8,8 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+ const command = require(`./commands/${file}`);
+ client.commands.set(command.name, command);
 }
 
 // `client.on('...')` events and such below this point
@@ -33,7 +33,6 @@ const wait = require('util').promisify(setTimeout);
 client.on('ready', () => {
  // "ready" isn't really ready. We need to wait a spell.
     wait(1000);
-  
     // Load all invites for all guilds and save them to the cache.
     // eslint-disable-next-line id-length
     client.guilds.forEach(g => {
@@ -42,16 +41,15 @@ client.on('ready', () => {
       });
     });
       // Set bot status to: "Playing with JavaScript"
-      client.user.setActivity(`on ${client.guilds.size} servers, ping me baby ping me`).
-      then(console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`));
-    
+      client.user.setActivity(`on ${client.guilds.size} servers, ping me baby ping me`, { "type": "WATCHING" }).
+      then(client.user.setStatus('idle')).
+      then(console.log(`Logged in as ${client.user.tag}!
+      Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users
+      I am ready!`));
         // Alternatively, you can set the activity to any of the following:
         // PLAYING, STREAMING, LISTENING, WATCHING
         // For example:
         // client.user.setActivity("TV", {type: "WATCHING"})
-    
-          console.log(`Logged in as ${client.user.tag}!`);
-    console.log('I am ready!');
 });
 
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
@@ -72,7 +70,7 @@ client.on("guildMemberAdd", (member) => { // Check out previous chapter for info
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     // This is just to simplify the message being sent below (inviter doesn't have a tag property)
     const inviter = client.users.get(invite.inviter.id);
-  
+
   if (guild.systemChannel) {
     guild.systemChannel.send(new Discord.RichEmbed(). // Creating instance of Discord.RichEmbed
     setTitle("someone walked in the wild west door's"). // Calling method setTitle on constructor. 
@@ -83,12 +81,10 @@ client.on("guildMemberAdd", (member) => { // Check out previous chapter for info
     Welcome to good burger, home of the good burger`). // Setting embed description
     setThumbnail(member.user.displayAvatarURL). // The image on the top right; method requires an url, not a path to file!
     addField("Troops now", member.guild.memberCount). // Adds a field; First parameter is the title and the second is the value.
-    setTimestamp() // Sets a timestamp at the end of the embed
-    // eslint-disable-next-line function-paren-newline
-    );
+    setTimestamp()); // Sets a timestamp at the end
   }
 });
- 
+
 });
 
 client.on('message', (message) => {
@@ -182,7 +178,7 @@ client.on("message", message => {
       if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
  
       message.channel.send(clean(evaled), { "code": "xl" });
-      console.log("eval" + eval(code));
+      console.log(clean(evaled));
     } catch (err) {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
       console.error(err);
