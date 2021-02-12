@@ -1,9 +1,9 @@
 /* eslint-disable sort-keys */
 module.exports = {
-	"name": "server",
-	"description": "Display advanced info about this server.",
-	execute (message) {
-		message.channel.send(`Server name: **${message.guild.name}**
+  "name": "server",
+  "description": "Display advanced info about this server.",
+  execute (message) {
+    message.channel.send(`Server name: **${message.guild.name}**
 created by:\`\`${message.guild.owner}\`\` who lives in the country of: **${message.guild.region}**
 at: **${message.guild.createdAt}**
 with icon: **${message.guild.icon}** ~~and **${message.guild.iconUrl}**~~
@@ -17,5 +17,5 @@ is server verified: **${message.guild.verified}**, you can verify your server at
 is server large(250 members) or small: **${message.guild.large}**
 required MFA level: **${message.guild.mfaLevel}**
 is explicit content filter enabled(scans and delete messages that contains explicit content): **${message.guild.explicitContentFilter}**`);
-	}
+  }
 };
